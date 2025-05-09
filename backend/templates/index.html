@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego de Gestos</title>
+</head>
+<body>
+    <h1>Juego de Gestos con la Mano</h1>
+
+    <button onclick="startGame('easy')">Modo Diestro</button>
+    <button onclick="startGame('lefty')">Modo Zurdos</button>
+
+    <br><br>
+
+    <h2 id="current_gesture">Esperando...</h2>
+    <h3 id="score">Puntaje: 0</h3>
+
+    <script>
+        async function startGame(mode) {
+            const res = await fetch(`/start_game/${mode}`, { method: "POST" });
+            const data = await res.json();
+            document.getElementById("current_gesture").innerText = "Haz el gesto: " + data.gesture;
+            document.getElementById("score").innerText = "Puntaje: 0";
+        }
+    </script>
+</body>
+</html>

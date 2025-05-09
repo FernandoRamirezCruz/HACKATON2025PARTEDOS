@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Juego de Gestos</title>
+    <script>
+        let timer = setInterval(() => {
+            const tiempo = parseInt(document.getElementById("tiempo").innerText);
+            if (tiempo <= 1) {
+                clearInterval(timer);
+                document.getElementById("scoreInput").value = parseInt(document.getElementById("puntos").innerText);
+                document.getElementById("scoreModal").style.display = "block";
+            }
+        }, 1000);
+    </script>
+    <style>
+        #scoreModal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Juego de Gestos</h1>
+    <img src="/video_feed" width="640" height="480" />
+    <div>
+        <p>Puntos: <span id="puntos">0</span></p>
+        <p>Gesto: <span id="gesto">Ninguno</span></p>
+        <p>Tiempo: <span id="tiempo">30</span>s</p>
+    </div>
+
+    <div id="scoreModal">
+        <div class="modal-content">
+            <form action="/save_score" method="post">
+                <label>Nombre:</label>
+                <input type="text" name="name" required><br><br>
+                <input type="hidden" id="scoreInput" name="score">
+                <button type="submit">Guardar Puntaje</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Actualiza puntos, gesto y tiempo cada segundo desde el servidor (simple polling)
+        setInterval(() => {
+            fetch("/game_state")
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("puntos").innerText = data.score;
+                    document.getElementById("gesto").innerText = data.gesture;
+                    document.getElementById("tiempo").innerText = data.time_left;
+                });
+        }, 500);
+    </script>
+</body>
+</html>

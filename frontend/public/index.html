@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+      <style>
+    body {
+      margin: 0; /* Muy importante para quitar márgenes por defecto */
+      background-color: #000000; /* Fondo negro base para el body */
+      /* O podrías poner el gradiente aquí también si quieres que sea el fondo absoluto */
+      /* background: linear-gradient(to bottom, #0d1b2a, #000000); */
+      /* min-height: 100vh; */ /* Asegura que el body ocupe toda la altura */
+    }
+  </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
