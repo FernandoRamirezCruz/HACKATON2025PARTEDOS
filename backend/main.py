@@ -10,10 +10,10 @@ from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
-# Configura CORS (permite todas las conexiones del frontend)
+# Configuración CORS para conectar con el frontend (Vue)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # En producción cambia esto por tu dominio real
+    allow_origins=["http://localhost:8080", "http://127.0.0.1:8080"],  # Ajusta según el puerto de tu frontend
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
