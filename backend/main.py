@@ -10,10 +10,10 @@ from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
-# Configura CORS (permite todas las conexiones del frontend)
+# Configuración CORS para conectar con el frontend (Vue)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # En producción cambia esto por tu dominio real
+    allow_origins=["http://localhost:8080", "http://127.0.0.1:8080"],  # Ajusta según el puerto de tu frontend
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -32,4 +32,4 @@ async def manos():
     return StreamingResponse(generate_hand_video(), media_type="multipart/x-mixed-replace; boundary=frame")
 
 # Monta el frontend construido (solo para producción)
-app.mount("/", StaticFiles(directory="../frontend/dist", html=True), name="frontend")
+app.mount("/", StaticFiles(directory="../frontend/", html=True), name="frontend")

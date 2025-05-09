@@ -47,7 +47,7 @@
       <div v-if="useGestures">
         <p v-if="gameState === 'waiting_player_choice'">¡Realiza tu gesto!</p>
         <div class="video-feed-container">
-          <video ref="videoPlayerRPS" autoplay playsinline muted width="240" height="180"></video>
+        <img :src="handVideoStreamUrl" alt="Video de detección de gestos" class="gesture-video" />
           <canvas ref="frameCanvasRPS" style="display: none;"></canvas>
         </div>
         <p v-if="isProcessingGesture">Procesando gesto...</p>
@@ -68,7 +68,7 @@ const WIN_CONDITIONS = {
   papel: 'rock',    // Paper vence a Rock
   tijeras: 'papel' // Scissors vence a Paper
 };
-const BACKEND_URL_RPS = 'http://localhost:5000'; // Asumiendo que tu backend corre aquí
+const BACKEND_URL_RPS = '127.0.0.1:8000'; // Asumiendo que tu backend corre aquí
 
 // --- Estado Reactivo del Juego ---
 const playerScore = ref(0);
