@@ -32,4 +32,4 @@ async def manos():
     return StreamingResponse(generate_hand_video(), media_type="multipart/x-mixed-replace; boundary=frame")
 
 # Monta el frontend construido (solo para producción)
-app.mount("/", StaticFiles(directory="../frontend/dist", html=True), name="frontend")
+app.mount("/", StaticFiles(directory="../frontend/", html=True), name="frontend")
